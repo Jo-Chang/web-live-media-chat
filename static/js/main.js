@@ -347,4 +347,6 @@ function getDataChannels() {
 
     dataChannels.push(dataChannel)
   }
+
+  return dataChannels
 }
