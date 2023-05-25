@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+{% load static %}
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="#" type="image/x-icon">
+  <title>Django Channels WebRTC</title>
+  <link rel="stylesheet" href="{% static 'css/main.css' %}">
+</head>
+<body>
+  <h3 id="label-username">USERNAME</h3>
+  <div>
+    <input id="username"><button id="btn-join">Join ROOM</button>
+  </div>
+
+  <div class="main-grid-container">
+    <div id="video-container">
+      <div>
+        <video src="" id="local-video" style="float: left;" autoplay playsinline></video>
+        <button id="btn-toggle-audio">Audio Mute</button>
+        <button id="btn-toggle-video">Video Off</button>
+      </div>
+
+      <div id="chat">
+        <h3>CHAT</h3>
+        <div id="messages">
+          <ul id="message-list"></ul>
+        </div>
+
+        <div>
+          <input id="msg"><button id="btn-send-msg">Send Message</button>
+          <button id="btn-share-screen">Share Screen</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% comment %} <script src="{% static 'js/main.js' %}"></script> {% endcomment %}
+  <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+</body>
+
+</html>
