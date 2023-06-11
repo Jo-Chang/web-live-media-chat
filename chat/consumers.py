@@ -11,6 +11,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
         )
 
         await self.accept()
+        print(self.channel_name)
+        print(self.room_group_name)
 
     async def disonnect(self, close_code):
         await self.channel_layer.group_discard(
@@ -25,13 +27,23 @@ class ChatConsumer(AsyncWebsocketConsumer):
         message = receive_dict['message']
         action = receive_dict['action']
         
+        print('action : ' + action)
+        print(receive_dict)
+        
         if (action == 'new-offer') or (action == 'new-answer'):
-            receiver_channer_name = receive_dict['message']['receiver_channel_name']
+            
+            if action == 'new-offer':
+                print(receive_dict['peer'], 'my sdp : ', receive_dict['message']['sdp'])
+            if action == 'new-answer':
+                print(receive_dict['peer'], 'your sdp : ', receive_dict['message']['sdp'])
+            receiver_channel_name = receive_dict['message']['receiver_channel_name']
             
             receive_dict['message']['receiver_channel_name'] = self.channel_name
             
+            
             await self.channel_layer.send(
-                receiver_channer_name,
+                # self.room_group_name
+                receiver_channel_name,
                 {
                     'type': 'send.sdp',
                     'receive_dict': receive_dict
